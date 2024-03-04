@@ -1,6 +1,6 @@
 asgiref==3.7.2
 chardet==5.2.0
-Django==4.2
+django==4.2
 django-ckeditor==6.7.0
 django-filter==23.5
 django-js-asset==2.2.0
