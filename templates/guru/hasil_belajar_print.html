@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Hasil Belajar (Print)</title>
+    <style>
+        /* Gaya CSS untuk cetak */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Data Hasil Belajar</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Kuis</th>
+                <th>Nilai</th>
+                <th>Waktu Pengerjaan</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz_submission in hasil_belajar %}
+            <tr>
+                <td>{{ quiz_submission.user }}</td>
+                <td>{{ quiz_submission.quiz }}</td>
+                <td>{{ quiz_submission.score }}</td>
+                <td>{{ quiz_submission.submitted_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

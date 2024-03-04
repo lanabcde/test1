@@ -1,0 +1,56 @@
+{% load widget_tweaks %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Login</title>
+  </head>
+  <body style="background:#F2EFE5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 mx-auto" style="margin:60px;">
+            <div class="card">
+              <div class="card-header text-black" style="background:#0C2D57; color:white;">
+                <h2 align="center">Login</h2>
+              </div>
+              <div class="card-body">
+                  <form action="{% url 'login_siswa' %}" method="POST" novalidate>
+                    {% csrf_token %}
+                       {% for field in form.visible_fields %}
+                         <div class="form-group">
+                             {{ field.label_tag }}
+                                {% render_field field class="form-control" %}
+                                  {% if messages%}
+                                    {% for message in messages %}
+                                      <span style="color:red">{{ message }}</span>
+                                    {% endfor %}
+                                   {% endif %}
+                       {% endfor %}
+                       <br>
+                       <p>Belum punya akun? <a href="{% url 'regist_siswa'%}">Daftar</a></p>
+                           <input type="submit" value="Login"  class="btn btn-primary btn-lg btn-block">
+                         </div>
+                  </form>
+               </div>
+                  </div>   
+              </div>
+            </div>
+          </div>
+      </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>

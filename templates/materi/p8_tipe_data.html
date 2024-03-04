@@ -1,0 +1,502 @@
+
+{% extends "baseMateri.html"%}
+
+{% load static %}
+
+{% block judul %}
+  <title>BAB 2 : Tipe Data,Variabel dan Operator</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+{% endblock judul %}
+
+{% block konten %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#bab1-nav" data-bs-toggle="collapse" href="#">
+        <span>Program dan Pemrograman</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab1-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'beranda_1'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'program'%}">
+            <i class="bi bi-circle"></i><span>Pemorgraman</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bahasa_pemrograman'%}">
+            <i class="bi bi-circle"></i><span>Bahasa Pemrograman</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'interpreter_compiler'%}">
+              <i class="bi bi-circle"></i><span>Bahasa Pemrograman Interpretasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'bahasa_python' %}">
+              <i class="bi bi-circle"></i><span>Bahasa Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab1' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 1</span>
+            </a>
+          </li>
+        </ul>
+
+        <li {% if user.siswa.progres < 1 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+          <a class="nav-link collapsed" data-bs-target="#bab2-nav" data-bs-toggle="collapse" href="#">
+           <span>Sintak Dasar Python</span>
+            {% if user.siswa.progres < 1 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+          </a>
+          <ul id="bab2-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{% url 'beranda2' %}">
+                <i class="bi bi-circle"></i><span>Beranda</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'sintak_dasar'%}">
+                <i class="bi bi-circle"></i><span>Sintak Dasar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'komentar'%}">
+                <i class="bi bi-circle"></i><span>Komentar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'kuis_bab2'%}">
+                <i class="bi bi-circle"></i><span>Kuis Bab 2</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+
+      
+      <li {% if user.siswa.progres < 2 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link" data-bs-target="#bab3-nav" data-bs-toggle="collapse" href="#">
+         <span>Tipe Data, variabel, Operator</span>
+          {% if user.siswa.progres < 2 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+        </a>
+        <ul id="bab3-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'beranda3' %}" >
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'tipe_data'%}" class = "active">
+              <i class="bi bi-circle"></i><span>Tipe Data</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'variabel'%}">
+              <i class="bi bi-circle"></i><span>Varaibel</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator'%}">
+              <i class="bi bi-circle"></i><span>Operator</span>
+            </a>
+            <li>
+                <a href="{% url 'operator_penugasan'%}">
+                  <i class="bi bi-circle"></i><span>Operator Penugasan</span>
+                </a>
+          </li>
+          <li>
+            <a href="{% url 'operator_perbandingan'%}">
+              <i class="bi bi-circle"></i><span>Operator Perbandingan</span>
+            </a>
+        </li>
+        <li>
+                <a href="{% url 'operator_logika'%}">
+                  <i class="bi bi-circle"></i><span>Operator Logika</span>
+                </a>
+        </li>   
+            <a href="{% url 'kuis_bab3'%}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li {% if user.siswa.progres < 3 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab4-nav" data-bs-toggle="collapse" href="#">
+        <span>Input Output Dasar</span>
+         {% if user.siswa.progres < 3 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab4-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'input' %}">
+            <i class="bi bi-circle"></i><span>Input Dasar</span>
+            </a>
+              </li>
+          <a href="{% url 'output' %}">
+            <i class="bi bi-circle"></i><span>Output Dasar</span>
+          </a>
+        </li>
+         <a href="kuis_bab4">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li {% if user.siswa.progres < 4 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab5-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Percabangan</span>
+         {% if user.siswa.progres < 4 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab5-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'percabangan' %}">
+              <i class="bi bi-circle"></i><span>Pengenalan Struktur Percabangan</span>
+            </a>
+          </li>
+        <li>
+          <a href="{% url 'percabangan_if'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_if_else'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If...Else</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_bersarang'%}">
+            <i class="bi bi-circle"></i><span>Percabangan Bersarang</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_elif' %}">
+            <i class="bi bi-circle"></i><span>Percabangan Elif</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'kuis_bab3' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li {% if user.siswa.progres < 5 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab6-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Perulangan</span>
+         {% if user.siswa.progres < 5 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab6-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'perulangan' %}">
+            <i class="bi bi-circle"></i><span>Pengenalan Struktur Perulangan</span>
+            </a>
+              </li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan While</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'perulangan_for' %}">
+            <i class="bi bi-circle"></i><span>Perulangan For</span>
+          </a>
+        </li>
+        <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+   
+
+    <li {% if user.siswa.progres < 6 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab7-nav" data-bs-toggle="collapse" href="#">
+           <span>Fungsi</span>
+            {% if user.siswa.progres < 6 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab7-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href=" {% url 'beranda5'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'fungsi'%}">
+            <i class="bi bi-circle"></i><span>Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'cara_kerja_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Cara Kerja Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameterisasi_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Parameterisasi Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'variabel_lokal_global'%}">
+            <i class="bi bi-circle"></i><span>Variabel Lokal Global</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_formal_aktual'%}">
+            <i class="bi bi-circle"></i><span>Parameter Formal Aktual</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_wajib_opsional'%}">
+            <i class="bi bi-circle"></i><span>Parameter Wajib dan Opsional</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Icons Nav -->   
+
+    <li {% if user.siswa.progres < 7 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+    
+      <a class="nav-link collapsed"  href="{% url 'input'%}">
+           <span>Evaluasi</span>
+      </a>
+  
+      <ul  class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      </ul>
+    </li>
+
+</aside><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-20">
+          <div class="row">        
+
+            <!-- Recent Sales -->
+            <div class="col-25">
+              <div class="card recent-sales overflow-auto">              
+
+                <div class="card-content">
+                  <h3 class="card-title" align="center"></span>Tipe Data</h3>
+                  <p>Dalam bahas pemrograman <strong>tipe data adalah jenis-jenis data yang akan di olah oleh komputer</strong>. Dalam bahasa python ada dua jenis tipe data yaitu tipe data primitive dan tipe data user defined.
+                    <strong>Tipe data primitive adalah tipe data yang sudah disediakan secara default oleh Python</strong>. Tipe data primitif  yang ada di python adalah  str, int, float, bool, dll.
+                 </p>
+                
+                    <li>String</li>
+                        <p>String adalah tipe data yang hanya  digunakan untuk memproses text. Di dalam Python, String merupakan tipe data yang digunakan untuk merepresentasikan teks atau urutan karakter. 
+                            String dapat berisi satu atau lebih karakter, dan dapat terdiri dari huruf, angka, tanda baca, dan simbol lainnya. String dapat dibuat dengan dua cara: menggunakan tanda kutip tunggal (' ') atau tanda kutip ganda (" ").
+                            Contoh penggunaan tipe data string : </p>
+                            <code>
+                                nama ='Lana'<br>
+                                prodi = "Pilkom"<br>
+                            </code><br>
+                    <li>Integer</li>
+                        <p>Tipe data integer adalah tipe data yang digunakan untuk memproses bilangan bulat. Tipe data integer dapat menampung bilangan bulat positif, nol,  bilanga bulat negative. Dalam Python, 
+                            integer digunakan untuk merepresentasikan bilangan bulat dan dapat melakukan operasi matematika seperti penjumlahan, pengurangan, perkalian, pembagian, modulus, dan pangkat. 
+                            Kita juga dapat mengkonversi integer ke tipe data lain, membulatkan bilangan, mengubah basis bilangan, menghitung panjang bilangan, dan membuat range bilangan untuk iterasi dalam loop.
+                            Berikut contoh tipe data integer : </p>
+                            <code>
+                                umur = 7<br>
+                                tahun = 2023<br>
+                            </code><br>
+
+                     <li>Float</li>
+                        <p>Float adalah salah satu tipe data numerik dalam bahasa pemrograman Python yang digunakan untuk merepresentasikan bilangan real dengan titik desimal. Tipe data float dapat digunakan untuk melakukan operasi matematika seperti penjumlahan, pengurangan, perkalian, dan pembagian.
+                           Berikut contoh penggunaan tipe data string :  </p>
+                            <code>
+                               pi =  3.14 <br>
+                               waktu = 20.211 <br>
+                               tinggi_badam =172.3 <br>
+                            </code><br>
+
+                    <li>Boolean</li>
+                        <p>Tipe data Boolean dalam Python adalah tipe data yang hanya memiliki dua nilai: True dan False. Nilai True dan False digunakan untuk mengevaluasi kondisi atau ekspresi logika dalam program Python. Dalam bahasa pemrograman lain, tipe data ini sering disebut dengan tipe data boolean atau tipe data logika.
+                            Berikut ontoh penggunaan tipe data Boolean dalam Python adalah untuk menguji apakah suatu kondisi benar atau salah :</p>
+                                <code>
+                                    True <br>
+                                    False <br>
+                                </code><br>
+                    <li> List </li>
+                        <p>Tipe data list di Python adalah tipe data yang digunakan untuk menyimpan koleksi data yang berurutan. List adalah tipe data yang bersifat mutable, yang berarti elemen-elemennya dapat diubah setelah list didefinisikan. Setiap elemen dalam list memiliki indeks yang dimulai dari 0 dan digunakan untuk mengakses elemen-elemen tersebut.</p>
+                        <code>
+                          bilangan_ganjil = [1,3,5,7,9] <br>
+                          buah = ["apel","jeruk","anggur"] <br>
+                       </code><br>
+                   <li> Tupple </li>
+                    <p>Tipe data tuple di Python adalah koleksi elemen yang mirip dengan list, tetapi dengan perbedaan utama yaitu tuple bersifat immutable, yang berarti setelah tuple didefinisikan, elemen-elemen di dalamnya tidak dapat diubah, ditambahkan, atau dihapus</p>
+                       <code>
+                        bilangan_genap = (2,4,6,8,10)<br>
+                        hewan_karnivora = ("Harimau","Ular","Buaya")<br>
+                       </code><br>
+
+                    <li> Dictionary </li>
+                       <p>Tipe data dictionary di Python adalah tipe data yang digunakan untuk menyimpan koleksi data yang terdiri dari pasangan kunci-nilai (key-value pairs) dan kunci ini bersifat uniq atau berbeda setiap elemennya.</p>
+                          <code>
+                           bilangan_genap = (2,4,6,8,10)<br>
+                           hewan_karnivora = ("Harimau","Ular","Buaya")<br>
+                          </code><br>
+                    
+                          <div class="quiz-container">
+                            <div class="card" style="padding:20px;">
+                              <h5 class="card-header">Latihan 3.1</h5>
+                              <strong><i class="bi bi-info-circle-fill"></i>&nbsp Petunjuk pengerjaan :</strong>                        <ul>
+                                  <li>Baca dan pahami setiap pertanyaan yang diberikan</li>
+                                  <li>Ketikan jawaban pada bagian yang kosong</li>
+                                  <li>Klik tombol cek jawaban untuk memeriksa jawaban</li>
+                                  <li>Jika jawaban benar maka akan muncul pesan "Jawaban benar !"</li>
+                                  <li>Jika jawaban salah maka akan muncul pesan "Jawaban Salah!"</li>
+                                  <li>Klik tombol selanjutnya untuk mengerjakan soal selajutnya, atau klik tombol sebelumnya unutk kembali ke soal sebelumnya</li>
+                                </ul>
+                            <div id="question1" class="question-card card" style="display: block;">
+                              <div class="card-body">
+                                <p>1. Data berupa bilangan bulat seperti 1, 100, 300 yang digunakan untuk operasi artimatika termasuk dalam tipe data? </p>
+                                 <input type="text" id="answer1">
+                                <div id="feedback1" class="feedback"></div><br>
+                                <button class="check-btn btn btn btn-primary btn btn-success btn-sm" onclick="checkAnswer(1)">Cek Jawaban</button>
+                                <button id="next-btn" class="next-btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                              </div>
+                            </div>
+                          
+                            <div id="question2" class="question-card card" style="display: none;">
+                              <div class="card-body">
+                                <p>2. Data berupa sekumpulan karakter atau kalimat termasuk dalam tipe data?</p>
+                              
+                                  <input type="text" id="answer2">
+                                </code>
+                                <div id="feedback2" class="feedback"></div><br>
+                                <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                                <button class="check-btn btn btn btn-success btn-sm" onclick="checkAnswer(2)">Cek Jawaban</button>
+                                <button id="next-btn" class="next-btn btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                              </div>
+                            </div>
+                          
+                            <div id="question3" class="question-card card" style="display: none;">
+                              <div class="card-body">
+                                <p>3. data yang berupa bilangan dsimal termasuk dalam tipe data? </p>
+                                <input type="text" id="answer3"><br>                              
+                                <div id="feedback3" class="feedback"></div><br>
+                                <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                                <button class="check-btn btn btn-success btn-sm" onclick="checkAnswer(3)">Cek Jawaban</button>
+                              </div>
+                            </div>
+                          </div>
+                  <div class="btn-nav">
+                  <a href="{% url 'beranda3' %}"><button class="btn btn-secondary"> Sebelumnya </button></a>
+                  <a href="{% url 'variabel' %}"><button class="btn btn-primary"> Selanjutnya </button></a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+           
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+  </main><!-- End #main -->
+  <script>
+    let currentQuestion = 1;
+    const totalQuestions = 3;
+  
+    function showQuestion(questionNumber) {
+      for (let i = 1; i <= totalQuestions; i++) {
+        const questionElement = document.getElementById(`question${i}`);
+        questionElement.style.display = i === questionNumber ? "block" : "none";
+      }
+  
+      // Menonaktifkan tombol "Selanjutnya" pada akhir pertanyaan
+      document.getElementById('next-btn').disabled = questionNumber === totalQuestions;
+    }
+  
+    function checkAnswer(questionNumber) {
+      const currentAnswer = document.getElementById(`answer${questionNumber}`).value.toLowerCase();
+      const feedbackElement = document.getElementById(`feedback${questionNumber}`);
+  
+      // Contoh jawaban benar untuk setiap pertanyaan
+      const correctAnswers = ["int", "string" , "float"];
+  
+      if (currentAnswer === correctAnswers[questionNumber - 1]) {
+        feedbackElement.textContent = "Jawaban Benar!";
+        feedbackElement.style.color = "green";
+      } else {
+        feedbackElement.textContent = "Jawaban Salah. Coba lagi!";
+        feedbackElement.style.color = "red";
+      }
+    }
+  
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      }
+    }
+  
+    function prevQuestion() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    }
+  </script>
+{% endblock konten %}
+

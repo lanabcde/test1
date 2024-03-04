@@ -1,0 +1,529 @@
+
+{% extends "baseMateri.html"%}
+
+{% load static %}
+
+{% block judul %}
+  <title>Komentar</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <style>
+    #answer1,#answer3{
+      width:30px;
+      display:;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      color: red;
+    }
+
+    code {
+      user-select: none;
+    }
+    
+  </style>
+{% endblock judul %}
+
+{% block konten %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#bab1-nav" data-bs-toggle="collapse" href="#">
+        <span>Program dan Pemrograman</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab1-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'beranda_1'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'program'%}">
+            <i class="bi bi-circle"></i><span>Pemorgraman</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bahasa_pemrograman'%}">
+            <i class="bi bi-circle"></i><span>Bahasa Pemrograman</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'interpreter_compiler'%}">
+              <i class="bi bi-circle"></i><span>Bahasa Pemrograman Interpretasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'bahasa_python' %}">
+              <i class="bi bi-circle"></i><span>Bahasa Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab1' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 1</span>
+            </a>
+          </li>
+        </ul>
+
+        <li {% if user.siswa.progres < 1 %} class="disabled" {% else %} class="nav-item" {% endif %}><li class="nav-item">
+          <a class="nav-link" data-bs-target="#bab2-nav" data-bs-toggle="collapse" href="#">
+           <span>Sintak Dasar Python</span>
+            {% if user.siswa.progres < 1 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+          </a>
+          <ul id="bab2-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{% url 'beranda2' %}">
+                <i class="bi bi-circle"></i><span>Beranda</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'sintak_dasar'%}">
+                <i class="bi bi-circle"></i><span>Sintak Dasar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'komentar'%}" class="active">
+                <i class="bi bi-circle"></i><span>Komentar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'kuis_bab2'%}">
+                <i class="bi bi-circle"></i><span>Kuis Bab 2</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+
+      
+      <li {% if user.siswa.progres < 2 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link collapsed" data-bs-target="#bab3-nav" data-bs-toggle="collapse" href="#">
+         <span>Tipe Data, variabel, Operator</span>
+          {% if user.siswa.progres < 2 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+        </a>
+        <ul id="bab3-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'beranda2' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'tipe_data'%}">
+              <i class="bi bi-circle"></i><span>Tipe Data</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'variabel'%}">
+              <i class="bi bi-circle"></i><span>Varaibel</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator'%}">
+              <i class="bi bi-circle"></i><span>Operator</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator_penugasan'%}">
+              <i class="bi bi-circle"></i><span>Operator Penugasan</span>
+            </a>
+      </li>
+      <li>
+        <a href="{% url 'operator_perbandingan'%}">
+          <i class="bi bi-circle"></i><span>Operator Perbandingan</span>
+        </a>
+    </li>
+    <li>
+            <a href="{% url 'operator_logika'%}">
+              <i class="bi bi-circle"></i><span>Operator Logika</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab3'%}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li {% if user.siswa.progres < 3 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab4-nav" data-bs-toggle="collapse" href="#">
+        <span>Input Output Dasar</span>
+         {% if user.siswa.progres < 3 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab4-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'input' %}">
+            <i class="bi bi-circle"></i><span>Input Dasar</span>
+            </a>
+              </li>
+          <a href="{% url 'output' %}">
+            <i class="bi bi-circle"></i><span>Output Dasar</span>
+          </a>
+        </li>
+         <a href="kuis_bab4">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li {% if user.siswa.progres < 4 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab5-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Percabangan</span>
+         {% if user.siswa.progres < 4 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab5-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'percabangan' %}">
+              <i class="bi bi-circle"></i><span>Pengenalan Struktur Percabangan</span>
+            </a>
+          </li>
+        <li>
+          <a href="{% url 'percabangan_if'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_if_else'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If...Else</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_bersarang'%}">
+            <i class="bi bi-circle"></i><span>Percabangan Bersarang</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_elif' %}">
+            <i class="bi bi-circle"></i><span>Percabangan Elif</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'kuis_bab3' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li {% if user.siswa.progres < 5 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab6-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Perulangan</span>
+         {% if user.siswa.progres < 5 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab6-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'perulangan' %}">
+            <i class="bi bi-circle"></i><span>Pengenalan Struktur Perulangan</span>
+            </a>
+              </li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan While</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan For</span>
+          </a>
+        </li>
+        <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+   
+
+    <li {% if user.siswa.progres < 6 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab7-nav" data-bs-toggle="collapse" href="#">
+           <span>Fungsi</span>
+            {% if user.siswa.progres < 6 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab7-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href=" {% url 'beranda5'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'fungsi'%}">
+            <i class="bi bi-circle"></i><span>Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'cara_kerja_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Cara Kerja Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameterisasi_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Parameterisasi Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'variabel_lokal_global'%}">
+            <i class="bi bi-circle"></i><span>Variabel Lokal Global</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_formal_aktual'%}">
+            <i class="bi bi-circle"></i><span>Parameter Formal Aktual</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_wajib_opsional'%}">
+            <i class="bi bi-circle"></i><span>Parameter Wajib dan Opsional</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Icons Nav -->   
+
+    <li {% if user.siswa.progres < 7 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+    
+      <a class="nav-link collapsed"  href="{% url 'input'%}">
+           <span>Evaluasi</span>
+      </a>
+  
+      <ul  class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      </ul>
+    </li>
+
+</aside><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-20">
+          <div class="row">        
+
+            <!-- Recent Sales -->
+            <div class="col-25">
+              <div class="card recent-sales overflow-auto">              
+
+                <div class="card-content">
+                    <h3 class="card-title" align="center"></span>Komentar</h3>
+                    <p>Komentar adalah bagian kode program yang tidak akan dieksekusi oleh interpreter python.
+                         Komentar memiliki fungsi untuk memberikan penejalasan tujuan dari kode ditulis, doumentasi,
+                          atau untuk memberi catatan kepada tim pengembang atau orang lain, karena kode program yang baik adalah kode program yang ditulis dan bisa dipahami oleh orang lain. 
+                          komentar jua diterpkan pada bahasa pemrograman lain, dalam bahasa python ada dua cara untuk memberikan komentar pada kode program yaitu komentar satu baris dan multi baris.
+                        </p>
+                    
+                        <h5>Komentar Satu Baris </h5>
+                        <p>Komentar satu baris adalah komentar yang diberikan dalam satu baris kode untuk menjelaskan secara singkat fungsi bagian kode tersebut.
+                            Untuk membuat komentar dalam satu baris kita menggunakan tanda pagar “#”. Perhatikan contoh dibawah ini :</p>
+
+                            <div class="card border mb-3" style="max-width: 25rem;">
+                                <div class="card-header">  <strong>Contoh kode 2.5 : Komentar Satu Baris</strong></div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <code>
+                                         #ini adalah komentar satu baris<br>
+                                         print("Belajar Komentar") #ini adalah komentar juga<br>                                      
+                                        </code>
+                                      </p>                          
+                                </div>
+                            </div>
+                        <p>Pada contoh diatas ada dua komentar yaitu bagian yang bertanda pagar, komentar tersebut tidak akan dieksekusi interpreter atau ditampilkan.</p>
+                        
+
+
+                        <h5>Komentar Multi Baris</h5>
+                        <p> Koemntar multi baris adalah komentar yang digunakan untuk memberikan penjelasan yang cukup panjang untuk bagian kode tertentu.
+                            Jika komentar yang kita berikan terlalu panjang sehingga melebihi ukuran layer, kita bisa menggunakan komentar multibaris agar mempermudah penulisan komentar.
+                             Untuk membuat komentar multi baris kita menggunakan simbol single quotes atau petik tunggual sebanyak tiga kali (‘ ‘ ‘) lalu diakhiri dengan simbol petik tunggal tiga kali lagi. Perhatikan gambar dibawah ini :
+                        </p>
+
+                        <div class="card border mb-3" style="max-width: 25rem;">
+                                <div class="card-header"><strong>Conoth kode 2.6 : Komentar Multi Baris</strong></div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <code>
+                                         ''' ini adalah komentar multi baris <br>
+                                             biasanya digunakan untuk menjelaskan <br>
+                                             bagian kode yang cukup panjang <br>
+                                             sehingga perlu beberapa baris <br>
+                                             agar tidak terlalu panjang '''<br><br>
+
+                                         print("Belajar Komentar Multi Baris") #ini komentar satu baris<br>                                      
+                                        </code>
+                                      </p>                          
+                                </div>
+                            </div>
+                        
+                    <p>Pada contoh diatas kita membuat  komentar multibaris dan komentar satu baris, sehingga kita bisa melihat dan membandikan kedua jenis komentar terebut.</p> 
+                    
+                    <div class="quiz-container">
+                      <div class="card" style="padding:20px;">
+                        <h5 class="card-header">Latihan 1.2</h5>
+                        <strong><i class="bi bi-info-circle-fill"></i>&nbsp Petunjuk pengerjaan :</strong>                        <ul>
+                            <li>Baca dan pahami setiap pertanyaan yang diberikan</li>
+                            <li>Ketikan jawaban pada bagian yang kosong</li>
+                            <li>Klik tombol cek jawaban untuk memeriksa jawaban</li>
+                            <li>Jika jawaban benar maka akan muncul pesan "Jawaban benar !"</li>
+                            <li>Jika jawaban salah maka akan muncul pesan "Jawaban Salah!"</li>
+                            <li>Klik tombol selanjutnya untuk mengerjakan soal selajutnya, atau klik tombol sebelumnya unutk kembali ke soal sebelumnya</li>
+                          </ul>
+                      <div id="question1" class="question-card card" style="display: block;">
+                        <div class="card-body">
+                          <p>1. Isikan bagian kosong pada kode program dibawah ini degan jawaban yang tepat!</p>
+                          <code>
+                           print("Belajar komentar pada python") <input type="text" id="answer1"> untuk mencetak kalimat
+                          </code>
+                          <div id="feedback1" class="feedback"></div><br>
+                          <button class="check-btn btn btn btn-primary btn btn-success btn-sm" onclick="checkAnswer(1)">Cek Jawaban</button>
+                          <button id="next-btn" class="next-btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                        </div>
+                      </div>
+                    
+                      <div id="question2" class="question-card card" style="display: none;">
+                        <div class="card-body">
+                          <p>2. Untuk membuat komentar multi baris pada bahasa python menggunakna simbol?</p>
+                          <code>
+                            <input type="text" id="answer2">
+                          </code>
+                          <div id="feedback2" class="feedback"></div><br>
+                          <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                          <button class="check-btn btn btn btn-success btn-sm" onclick="checkAnswer(2)">Cek Jawaban</button>
+                          <button id="next-btn" class="next-btn btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                        </div>
+                      </div>
+                    
+                      <div id="question3" class="question-card card" style="display: none;">
+                        <div class="card-body">
+                          <p>3. lengkapi bagian kosong kode program diabwah ini dengan jawaban yang tepat untuk membuat komentar multi baris </p>
+                         <code>
+                          <input type="text" id="answer3"><br>
+                          ini adalah komentar<br>
+                          multi baris<br>
+                          '''
+                         </code>
+                          
+                          <div id="feedback3" class="feedback"></div><br>
+                          <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                          <button class="check-btn btn btn-success btn-sm" onclick="checkAnswer(3)">Cek Jawaban</button>
+                        </div>
+                      </div>
+                    </div>
+          </div>
+                   <div class="btn-nav"> 
+                     <a href="{% url 'sintak_dasar'%}"> <button type="button" class="btn btn-secondary">Sebelumnya</button></a>
+                     <a href="{% url 'kuis_bab2'%}"> <button type="button" class="btn btn-primary">Selanjutnya</button></a>         
+                   </div>
+                </div>
+
+              </div>
+            </div>
+
+           
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+  </main><!-- End #main -->
+  <script>
+    let currentQuestion = 1;
+    const totalQuestions = 3;
+  
+    function showQuestion(questionNumber) {
+      for (let i = 1; i <= totalQuestions; i++) {
+        const questionElement = document.getElementById(`question${i}`);
+        questionElement.style.display = i === questionNumber ? "block" : "none";
+      }
+  
+      // Menonaktifkan tombol "Selanjutnya" pada akhir pertanyaan
+      document.getElementById('next-btn').disabled = questionNumber === totalQuestions;
+    }
+  
+    function checkAnswer(questionNumber) {
+      const currentAnswer = document.getElementById(`answer${questionNumber}`).value;
+      const feedbackElement = document.getElementById(`feedback${questionNumber}`);
+  
+      // Contoh jawaban benar untuk setiap pertanyaan
+      const correctAnswers = ["#", "'''" , "'''"];
+  
+      if (currentAnswer === correctAnswers[questionNumber - 1]) {
+        feedbackElement.textContent = "Jawaban Benar!";
+        feedbackElement.style.color = "green";
+      } else {
+        feedbackElement.textContent = "Jawaban Salah. Coba lagi!";
+        feedbackElement.style.color = "red";
+      }
+    }
+  
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      }
+    }
+  
+    function prevQuestion() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    }
+  </script>
+{% endblock konten %}
+
+
+
+
+
+
+
+
+
+

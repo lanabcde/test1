@@ -1,0 +1,171 @@
+{% extends 'index.html' %}
+
+{% block title %}{{quiz.title}}{% endblock title %}
+
+{% block content %}
+
+    <h1 class="display-4 text-center my-5">{{quiz.title}} - ({{quiz.question_set.all|length}} soal)</h1>
+
+    <div class="container">
+        <div class="d-flex justify-content-between">
+          
+           <p> Waktu Pengerjaan : </p><span class="fs-5" id="timer">-</span>
+        </div>
+
+        <div class="questions my-4">
+            {% for question in quiz.question_set.all %}
+            <div class="card mb-2 question">
+                <div class="card-header fw-bold">
+                    Soal {{forloop.counter}}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{question.text1}}</p>
+
+                    {% if question.quiz_img %}
+                    <img src="{{ question.quiz_img.url }}" alt="Quiz Image" class="img-fluid mb-3" id="quizImg{{forloop.counter}}"
+                     style="width: 100%; max-width: 500px; height: auto;">
+                    <script>
+                        // JavaScript code to hide image if it's not available
+                        var quizImg = document.getElementById("quizImg{{forloop.counter}}");
+                        if (!quizImg.complete || quizImg.naturalHeight === 0) {
+                            quizImg.style.display = "none";
+                        }
+                        else{
+                            quizImg.style.display = "block";
+                        }
+                    </script>
+                {% endif %}
+
+                    <p class="card-text">{{question.text2}}</p>
+                    {% for option in question.choice_set.all %}
+                    <div class="form-check">
+                        <label class="form-check-label" for="{{option.id}}">
+                            <input class="form-check-input" value="{{option.text}}" type="radio" name="{{option.question.id}}" id="{{option.id}}">
+                            {{option.text}}
+                        </label>
+                        {% if option.is_correct %}
+                        <span class="visually-hidden correct-answer">{{option.text}}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form action="" method="post" id="quiz-form">
+            {% csrf_token %}
+            <!-- hidden input field for score -->
+            <input type="hidden" name="score" value="0" id="user-score">
+
+            <!-- submit button -->
+            <button type="submit" class="btn btn-primary" id="submit-button">Kirim Jawaban</button>
+        </form>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+    <script>
+        // Element HTML
+        var submitButton = document.getElementById("submit-button");
+        var timerSpan = document.getElementById("timer");
+        var quizForm = document.getElementById("quiz-form");
+        var questions = document.querySelectorAll(".question");
+        var userScoreInput = document.getElementById("user-score");
+    
+        // Periksa apakah halaman baru saja dimuat
+        var halamanDimuat = sessionStorage.getItem('halamanDimuat');
+    
+        // Jika halaman baru saja dimuat, perbarui halaman setelah 3 detik
+        if (!halamanDimuat) {
+            setTimeout(function () {
+                location.reload();
+            }, 3000);
+            sessionStorage.setItem('halamanDimuat', true);
+        }
+    
+        // Periksa apakah ada nilai timer yang disimpan di sessionStorage
+        var waktuTersimpan = sessionStorage.getItem('quizTimer');
+        var durasiKuis = waktuTersimpan ? parseInt(waktuTersimpan) : (questions.length) * 180; // konversi dalam detik
+    
+        // Fungsi untuk memperbarui Timer
+        function perbaruiTimer() {
+            var menit = Math.floor(durasiKuis / 60);
+            var detik = durasiKuis % 60;
+    
+            timerSpan.innerText = menit + "m" + detik + 's';
+    
+            // Periksa apakah waktu sudah habis
+            if (durasiKuis <= 0) {
+                // Secara otomatis kirim kuis
+                clearTimeout(idTimerKuis);
+                kirimKuis();
+            } else if (document.getElementById("message-div")) {
+                clearTimeout(idTimerKuis);
+                sorotJawabanBenar();
+            } else {
+                // Kurangi nilai timer sebesar 1 detik
+                durasiKuis--;
+                // Simpan nilai timer yang diperbarui di sessionStorage
+                sessionStorage.setItem('quizTimer', durasiKuis.toString());
+            }
+        }
+    
+        // Fungsi untuk mengirimkan kuis
+        function kirimKuis() {
+            // Hitung nilai
+            hitungNilai();
+    
+            // Hapus nilai timer yang tersimpan dari sessionStorage
+            sessionStorage.removeItem('quizTimer');
+    
+            // Kirim kuis
+            quizForm.submit();
+        }
+    
+        // Periksa jawaban yang benar dan hitung nilai
+        function hitungNilai() {
+            var nilai = 0;
+    
+            // Loop melalui setiap pertanyaan
+            questions.forEach(pertanyaan => {
+                var inputTerpilih = pertanyaan.querySelector('input:checked');
+                var jawabanBenar = pertanyaan.querySelector(".correct-answer").innerText;
+    
+                // Periksa apakah jawaban benar atau tidak
+                if (inputTerpilih && inputTerpilih.value === jawabanBenar) {
+                    nilai += 20;
+                }
+            });
+    
+            // Perbarui nilai yang tersembunyi dengan nilai di formulir
+            userScoreInput.value = nilai;
+        }
+    
+        // Sorot jawaban yang benar saat menampilkan hasil
+        function sorotJawabanBenar() {
+            questions.forEach(pertanyaan => {
+                var jawabanBenar = pertanyaan.querySelector(".correct-answer");
+            });
+    
+            // Nonaktifkan tombol submit
+            submitButton.disabled = true;
+    
+            // Nonaktifkan semua opsi
+            var opsi = document.querySelectorAll(".form-check-input");
+            opsi.forEach(pilihan => {
+                pilihan.disabled = true;
+            });
+        }
+    
+        // Tambahkan Event Listener ke tombol Submit
+        submitButton.addEventListener("click", kirimKuis);
+    
+        // Interval Timer
+        idTimerKuis = setInterval(perbaruiTimer, 1000);
+    
+    </script>
+    
+
+{% endblock content %}

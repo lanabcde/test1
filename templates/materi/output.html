@@ -1,0 +1,515 @@
+
+{% extends "baseMateri.html"%}
+
+{% load static %}
+
+{% block judul %}
+  <title>Output Dasar</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <style>
+    #answer1a,#answer1b{
+      width:40px;
+    }
+    #answer1b,#answer2a,#answer2b,#answer3a,#answer3b{
+      width:40px;
+    }
+
+    .feedback {
+      margin-top: 10px;
+      color: red;
+    }
+
+    code {
+      user-select: none;
+    }
+
+    #btn-nav{
+      display: flex;
+      justify-content: space-between;
+    }
+    
+  </style>
+{% endblock judul %}
+
+{% block konten %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#bab1-nav" data-bs-toggle="collapse" href="#">
+        <span>Program dan Pemrograman</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab1-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'beranda_1'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'program'%}">
+            <i class="bi bi-circle"></i><span>Pemorgraman</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bahasa_pemrograman'%}">
+            <i class="bi bi-circle"></i><span>Bahasa Pemrograman</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'interpreter_compiler'%}">
+              <i class="bi bi-circle"></i><span>Bahasa Pemrograman Interpretasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'bahasa_python' %}">
+              <i class="bi bi-circle"></i><span>Bahasa Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab1' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 1</span>
+            </a>
+          </li>
+        </ul>
+
+        <li {% if user.siswa.progres < 1 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+          <a class="nav-link collapsed" data-bs-target="#bab2-nav" data-bs-toggle="collapse" href="#">
+           <span>Sintak Dasar Python</span> {% if user.siswa.progres < 1 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+          </a>
+          <ul id="bab2-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{% url 'beranda2' %}">
+                <i class="bi bi-circle"></i><span>Beranda</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'sintak_dasar'%}">
+                <i class="bi bi-circle"></i><span>Sintak Dasar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'komentar'%}">
+                <i class="bi bi-circle"></i><span>Komentar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'kuis_bab2'%}">
+                <i class="bi bi-circle"></i><span>Kuis Bab 2</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+
+      
+      <li {% if user.siswa.progres < 2 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link collapsed" data-bs-target="#bab3-nav" data-bs-toggle="collapse" href="#">
+         <span>Tipe Data, variabel, Operator</span> {% if user.siswa.progres < 2 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+        </a>
+        <ul id="bab3-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'tipe_data'%}">
+              <i class="bi bi-circle"></i><span>Tipe Data</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'variabel'%}">
+              <i class="bi bi-circle"></i><span>Varaibel</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator'%}">
+              <i class="bi bi-circle"></i><span>Operator</span>
+            </a>
+            <li>
+                <a href="{% url 'operator_penugasan'%}">
+                  <i class="bi bi-circle"></i><span>Operator Penugasan</span>
+                </a>
+          </li>
+          <li>
+            <a href="{% url 'operator_perbandingan'%}">
+              <i class="bi bi-circle"></i><span>Operator Perbandingan</span>
+            </a>
+        </li>
+        <li>
+                <a href="{% url 'operator_logika'%}">
+                  <i class="bi bi-circle"></i><span>Operator Logika</span>
+                </a>
+        </li>   
+            <a href="{% url 'kuis_bab2'%}"> 
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li {% if user.siswa.progres < 3 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link " data-bs-target="#bab4-nav" data-bs-toggle="collapse" href="#">
+        <span>Input Output Dasar</span> {% if user.siswa.progres < 3 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>  
+      <ul id="bab4-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'input' %}">
+            <i class="bi bi-circle"></i><span>Input Dasar</span>
+            </a>
+              </li>
+          <a href="{% url 'output' %}" class="active">
+            <i class="bi bi-circle"></i><span>Output Dasar</span>
+          </a>
+        </li>
+         <a href="kuis_bab4">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li {% if user.siswa.progres < 4 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab5-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Percabangan</span> {% if user.siswa.progres < 4 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab5-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'percabangan' %}">
+              <i class="bi bi-circle"></i><span>Pengenalan Struktur Percabangan</span>
+            </a>
+          </li>
+        <li>
+          <a href="{% url 'percabangan_if'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_if_else'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If...Else</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_bersarang'%}">
+            <i class="bi bi-circle"></i><span>Percabangan Bersarang</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_elif' %}">
+            <i class="bi bi-circle"></i><span>Percabangan Elif</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'kuis_bab3' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li {% if user.siswa.progres < 5 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab6-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Perulangan</span> {% if user.siswa.progres < 5 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab6-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'perulangan' %}">
+            <i class="bi bi-circle"></i><span>Pengenalan Struktur Perulangan</span>
+            </a>
+              </li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan While</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'perulangan_for' %}">
+            <i class="bi bi-circle"></i><span>Perulangan For</span>
+          </a>
+        </li>
+        <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li {% if user.siswa.progres < 6 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab7-nav" data-bs-toggle="collapse" href="#">
+           <span>Fungsi</span> {% if user.siswa.progres < 6 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab7-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href=" {% url 'beranda5'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'fungsi'%}">
+            <i class="bi bi-circle"></i><span>Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'cara_kerja_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Cara Kerja Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameterisasi_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Parameterisasi Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'variabel_lokal_global'%}">
+            <i class="bi bi-circle"></i><span>Variabel Lokal Global</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_formal_aktual'%}">
+            <i class="bi bi-circle"></i><span>Parameter Formal Aktual</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_wajib_opsional'%}">
+            <i class="bi bi-circle"></i><span>Parameter Wajib dan Opsional</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Icons Nav -->   
+
+    <li {% if user.siswa.progres < 7 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed"  href="{% url 'input'%}">
+           <span>Evaluasi</span>
+      </a>
+  
+      <ul  class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      </ul>
+    </li>
+
+</aside><!-- End Sidebar--><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-20">
+          <div class="row">        
+
+            <!-- Recent Sales -->
+            <div class="col-25">
+              <div class="card recent-sales overflow-auto">              
+
+                <div class="card-content">
+                    <h3 class="card-title" align="center"></span>Output Dasar</h3>
+               
+                        <p>Output adalah hasil keluaran dari sebuah proses yang dijalankan oleh python. Dalam pyhton output ada dua jenis yaitu output yang ditampilkan kelayar dan putput berupa file. 
+                            Pada materi kali ini kita hanya membahas output yang ditmpilkan kelayar saja. Untuk membuat output tampil pada layer kita menggunakan fungsi print(). </p>
+                            <div class="card border mb-3" style="max-width: 30rem;">
+                                <div class="card-header">Contoh kode 4.4</div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <code>
+                                        #contoh fungsi print() menampilkan string <br>
+                                         print("Bahasa pemrograman Python") <br><br>
+                                         #contoh fungsi print() menampilkan nilai varaibel <br>
+                                         nama = bayu <br>
+                                         print("nama = ", nama)<br>
+                                        </code>
+                                      </p>                          
+                                </div>
+                            </div>
+                            <p>Selain menampilkan string, fungsi print() juga bisa menampilkan nilai dari sebuah atau beberapa varaibel dengan pembatas tanda koma(,)
+                                seperti contoh diatas. Fungsi print() juga bisa membuat kalimat yang kita tampilkan menjadi beberapa baris dengan menggunakan simbol newline (\n), selain itu kita juga bisa menambahkan fungsi line kosong utntuk membuat baris baru seperti pada contoh berikut :</p>
+                                <div class="card border mb-3" style="max-width: 40rem;">
+                                    <div class="card-header">Contoh kode 4.5 </div>
+                                    <div class="card-body">
+                                        <p class="card-text">
+                                            <code>
+                                           print("Makanan Khas Banjar")<br>
+                                           print()<br>
+                                           print("Makanan khas banjar yaitu : \n mandai \n gangan umbut \n ketupat kandangan")
+                                            </code>
+                                          </p>                          
+                                    </div>
+                                </div>
+                               <p> silahkan coba contoh-contoh kode diatas pada IDE berikut !</p>
+
+                               <script async src="https://edube.org/sandbox/5cd948cc-765d-11ee-9364-0242157e55ca/embed?height=250"></script>
+
+                               <div class="quiz-container">
+                                <div class="card" style="padding:20px;">
+                                  <div class="card-header"><h5>Latihan 4.2</h5></div>
+                                  <strong><i class="bi bi-info-circle-fill"></i>&nbsp Petunjuk pengerjaan :</strong><br>
+                                    <ul>
+                                      <li>Baca dan pahami setiap pertanyaan yang diberikan</li>
+                                      <li>Ketikan jawaban pada bagian yang kosong</li>
+                                      <li>Klik tombol cek jawaban unutk memeriksa jawaban</li>
+                                      <li>Jika jawaaban benar maka akan uncul pesan "Jawaban benar !"</li>
+                                      <li>Jika jawaban salah maka akan munucl pesan "Jawaban Salah!"</li>
+                                      <li>Klik tombol selanjutnya untuk mengerjakan soal selajutnya, atau klik tombol sebelumnya unutk kembali ke saol sebelumnya</li>
+                                    </ul>
+                                <div id="question1" class="question-card card" style="display: block;">
+                                  <div class="card-body">
+                                    <p>1. Isikan bagian kosong pada kode program dibawah ini degan jawaban yang tepat agar bisa menampilkan nilai dari variabel <code>hewan</code> </p>
+                                    <hr>
+                                    <code>
+                                      &nbsp&nbsp Hewan = "ular" <br>
+                                      &nbsp&nbsp <input type="text" id="answer1a">("Nama hewan = ",<input type="text" id="answer1b">)
+                                    </code>
+                                    <div id="feedback1" class="feedback"></div><br>
+                                    <button class="check-btn btn btn btn-primary btn btn-success btn-sm" onclick="checkAnswer(1)">Cek Jawaban</button>
+                                    <button id="next-btn" class="next-btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                                  </div>
+                                </div>
+                              
+                                <div id="question2" class="question-card card" style="display: none;">
+                                  <div class="card-body">
+                                    <p>2.isikan bagian kode dengan jawaban yang tepat agar bisa menampilkan nilai yang disipan varaibel <code>kata1</code> dan <code>kata2</code></p>
+                                    <code>
+                                      &nbsp&nbsp kata1 = "Pilkom"<br>
+                                      &nbsp&nbsp kata2 = "ULM"<br>
+                                      &nbsp&nbsp print(<input type="text" id="answer2a">,<input type="text" id="answer2b">)
+                                    </code>
+                                    <div id="feedback2" class="feedback"></div><br>
+                                    <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                                    <button class="check-btn btn btn btn-success btn-sm" onclick="checkAnswer(2)">Cek Jawaban</button>
+                                    <button id="next-btn" class="next-btn btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                                  </div>
+                                </div>
+                              
+                                <div id="question3" class="question-card card" style="display: none;">
+                                  <div class="card-body">
+                                    <p>3.Lengkapi bagian kosong dengan jawaban yang tepat agar dua kaliamt yang ditampilkan dipisahkan oleh garis baru</p>
+                                    <code>
+                                      &nbsp&nbsp print("belajar membuat baris baru \<input type="text" id="answer3a"> dengan python")<br>
+                                      <input type="text" id="answer3b"><br>
+                                      print("materi output dasar")<br>
+                                      </code>
+                                    <div id="feedback3" class="feedback"></div><br>
+                                    <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                                    <button class="check-btn btn btn-success btn-sm" onclick="checkAnswer(3)">Cek Jawaban</button>
+                                  </div>
+                                </div>
+                              </div>
+            
+                    <div id="btn-nav">
+                     <a href="{% url 'input'%}"> <button type="button" class="btn btn-secondary">Sebelumnya</button></a>
+                     <a href="{% url 'kuis_bab4'%}"> <button type="button" class="btn btn-primary">Selanjutnya</button></a>         
+                    </div>
+                </div>
+
+              </div>
+            </div>
+
+           
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+  </main><!-- End #main -->
+  <script>
+    let currentQuestion = 1;
+    const totalQuestions = 3;
+  
+    function showQuestion(questionNumber) {
+      for (let i = 1; i <= totalQuestions; i++) {
+        const questionElement = document.getElementById(`question${i}`);
+        questionElement.style.display = i === questionNumber ? "block" : "none";
+      }
+  
+      // Menonaktifkan tombol "Selanjutnya" pada akhir pertanyaan
+      document.getElementById('next-btn').disabled = questionNumber === totalQuestions;
+    }
+  
+    function checkAnswer(questionNumber) {
+      const answerA = document.getElementById(`answer${questionNumber}a`).value;
+      const answerB = document.getElementById(`answer${questionNumber}b`).value;
+      const feedbackElement = document.getElementById(`feedback${questionNumber}`);
+  
+      // Contoh jawaban benar untuk setiap pertanyaan
+      const correctAnswersA = ["print", "kata1", "n"];
+      const correctAnswersB = ["Hewan", "kata2", "print()"];
+  
+      if (answerA === correctAnswersA[questionNumber - 1] && answerB === correctAnswersB[questionNumber - 1]) {
+        feedbackElement.textContent = "Jawaban Benar!";
+        feedbackElement.style.color = "green";
+      } else {
+        feedbackElement.textContent = "Jawaban Salah. Coba lagi!";
+        feedbackElement.style.color = "red";
+      } 
+    }
+  
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      }
+    }
+  
+    function prevQuestion() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    }
+  </script>
+{% endblock konten %}
+
+
+
+
+
+
+
+
+
+

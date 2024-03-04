@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"/>
+    <title>Ngo.py</title>
+  </head>
+  <body>
+    <!-- navigatin bar -->
+
+    <header class="bg-header">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand text-white fw-bold" href="#" data-bs-toggle="tooltip" data-bs-title="FoodieXpress" data-bs-placement="bottom">Ngo.py</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item px-2">
+                <a class="nav-link" aria-current="page" href="/">Home</a>
+              </li>
+              <li class="nav-item px-2">
+                <a class="nav-link" aria-current="page" href="">Tentang</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item px-2 text-white">
+                <i class="bi bi-person-fill text-white"></i> <a class="nav-link disabled" aria-current="page" href="">@{{ user.username }}</a>
+              </li>
+              <li class="nav-item px-3">
+                <a href="{% url 'logout'%}" class="d-inline-flex align-items-center btn btn-secondary btn-lg px-4">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item px-3">
+                <a href="{% url 'login_siswa'%}" class="d-inline-flex align-items-center btn btn-primary btn-lg px-4">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </nav>
+  
+          <section class="hero-section py-5" >
+        <div class="container py-3">
+          <div class="row g-5">
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="col-12 col-lg-6">
+                <h2 class="text-white fw-bold">
+                  Selamat Datang di Ngo.py
+                </h2>
+                <p class="text-white pt-4">
+                  Selamat datang di platform pembelajaran interaktif kami! Mari eksplorasi keajaiban dunia 
+                  pemrograman dengan memulai perjalanan Anda dalam memahami dasar-dasar bahasa pemrograman Python.
+                   Dengan kurikulum yang disusun secara sistematis, kami memastikan bahwa setiap langkah membawa Anda 
+                   lebih dekat untuk menguasai fondasi pemrograman yang kuat.
+               
+                  </p>
+                  <a href={% url 'beranda_1'%} class="d-inline-flex align-items-center btn btn-primary btn-lg px-4">
+                    Mulai Belajar
+                </a>
+              </div>
+              <div class="col-12 col-lg-6">
+                <div class="d-flex justify-content-end">
+                  <img src="{% static 'img/hero.png'%}" style="width:500px;height=400px;">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+    </main>
+
+    <footer>
+      <div class="container py-5" id="contact">
+      
+           
+      <p align="center" class="text-center copyright"> &copy; 2023 all right reserved by foodiexpress</p>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"
+      integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <script>
+      const tooltipTriggerList = document.querySelectorAll(
+        '[data-bs-toggle="tooltip"]'
+      );
+      const tooltipList = [...tooltipTriggerList].map(
+        (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
+      );
+    </script>
+  </body>
+</html>

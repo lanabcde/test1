@@ -1,0 +1,24 @@
+ {% load static%} 
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+  
+      {% for bab in bab_list %}
+        <li class="nav-item {% if bab.active %}active{% endif %}">
+          <a class="nav-link collapsed" data-bs-target="#{{ bab.target }}" data-bs-toggle="collapse" href="#">
+            <span>{{ bab.title }}</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="{{ bab.target }}" class="nav-content collapse {% if bab.active %}show{% endif %}" data-bs-parent="#sidebar-nav">
+            {% for subpage in bab.subpages %}
+              <li>
+                <a href="{% url subpage.url %}" class="{% if subpage.active %}active{% endif %}">
+                  <i class="bi bi-circle"></i><span>{{ subpage.title }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% endfor %}
+  
+    </ul>
+  </aside>

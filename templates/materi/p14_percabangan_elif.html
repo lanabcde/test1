@@ -1,0 +1,560 @@
+
+{% extends "baseMateri.html"%}
+
+{% load static %}
+
+{% block judul %}
+  <title>Percabangan Elif</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <style>
+    #answer1a,#answer1b,#answer2a,#answer3a{
+      width:20px;
+ 
+    }
+
+    #answer1b,#answer1c,#answer2b, #answer2c, #answer3b,#answer3c{
+      width:40px
+ 
+    }
+
+    .feedback {
+      font-size: 18px;
+      font-weight:bold;
+      margin-top: 10px;
+      color: red;
+    }
+
+    code {
+      font-size: 30px;
+      user-select: none;
+    }
+
+    #btn-nav{
+
+      display: flex;
+      justify-content: space-between;
+    }
+
+    
+  </style>
+{% endblock judul %}
+
+{% block konten %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#bab1-nav" data-bs-toggle="collapse" href="#">
+        <span>Program dan Pemrograman</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab1-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'beranda_1'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'program'%}">
+            <i class="bi bi-circle"></i><span>Pemorgraman</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bahasa_pemrograman'%}">
+            <i class="bi bi-circle"></i><span>Bahasa Pemrograman</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'interpreter_compiler'%}">
+              <i class="bi bi-circle"></i><span>Bahasa Pemrograman Interpretasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'bahasa_python' %}">
+              <i class="bi bi-circle"></i><span>Bahasa Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab1' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 1</span>
+            </a>
+          </li>
+        </ul>
+
+        <li {% if user.siswa.progres < 1 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+          <a class="nav-link collapsed" data-bs-target="#bab2-nav" data-bs-toggle="collapse" href="#">
+           <span>Sintak Dasar Python</span>
+           {% if user.siswa.progres < 1 %}
+           <i class="bi bi-lock-fill ms-auto"></i>
+         {% else %}
+           <i class="bi bi-chevron-down ms-auto"></i>
+         {% endif %}
+          </a>
+          <ul id="bab2-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{% url 'beranda2' %}">
+                <i class="bi bi-circle"></i><span>Beranda</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'sintak_dasar'%}">
+                <i class="bi bi-circle"></i><span>Sintak Dasar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'komentar'%}">
+                <i class="bi bi-circle"></i><span>Komentar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'kuis_bab2'%}">
+                <i class="bi bi-circle"></i><span>Kuis Bab 2</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+
+      
+      <li {% if user.siswa.progres < 2 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link collapsed" data-bs-target="#bab3-nav" data-bs-toggle="collapse" href="#">
+         <span>Tipe Data, variabel, Operator</span>
+         {% if user.siswa.progres < 2 %}
+         <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+         <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+        </a>
+        <ul id="bab3-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'tipe_data'%}">
+              <i class="bi bi-circle"></i><span>Tipe Data</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'variabel'%}">
+              <i class="bi bi-circle"></i><span>Varaibel</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator'%}">
+              <i class="bi bi-circle"></i><span>Operator</span>
+            </a>
+            <li>
+                <a href="{% url 'operator_penugasan'%}">
+                  <i class="bi bi-circle"></i><span>Operator Penugasan</span>
+                </a>
+          </li>
+          <li>
+            <a href="{% url 'operator_perbandingan'%}">
+              <i class="bi bi-circle"></i><span>Operator Perbandingan</span>
+            </a>
+        </li>
+        <li>
+                <a href="{% url 'operator_logika'%}">
+                  <i class="bi bi-circle"></i><span>Operator Logika</span>
+                </a>
+        </li>   
+            <a href="{% url 'kuis_bab2'%}"> 
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li {% if user.siswa.progres < 3 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed " data-bs-target="#bab4-nav" data-bs-toggle="collapse" href="#">
+        <span>Input Output Dasar</span>
+        {% if user.siswa.progres < 3 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+      {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+      {% endif %}
+      </a>
+      <ul id="bab4-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'input' %}">
+            <i class="bi bi-circle"></i><span>Input Dasar</span>
+            </a>
+              </li>
+          <a href="{% url 'output' %}">
+            <i class="bi bi-circle"></i><span>Output Dasar</span>
+          </a>
+        </li>
+         <a href="kuis_bab4">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li {% if user.siswa.progres < 4 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link" data-bs-target="#bab5-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Percabangan</span>
+        {% if user.siswa.progres < 4 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+      {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+      {% endif %}
+      </a>
+      <ul id="bab5-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda5' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'percabangan' %}">
+              <i class="bi bi-circle"></i><span>Pengenalan Struktur Percabangan</span>
+            </a>
+          </li>
+        <li>
+          <a href="{% url 'percabangan_if'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_if_else'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If...Else</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_bersarang'%}">
+            <i class="bi bi-circle"></i><span>Percabangan Bersarang</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_elif' %}" class="active">
+            <i class="bi bi-circle"></i><span>Percabangan Elif</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'kuis_bab5' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 5</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li {% if user.siswa.progres < 5 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab6-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Perulangan</span>
+        {% if user.siswa.progres < 5 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+      {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+      {% endif %}
+      </a>
+      <ul id="bab6-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'perulangan' %}">
+            <i class="bi bi-circle"></i><span>Pengenalan Struktur Perulangan</span>
+            </a>
+              </li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan While</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'perulangan_for' %}">
+            <i class="bi bi-circle"></i><span>Perulangan For</span>
+          </a>
+        </li>
+        <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+   
+
+    <li {% if user.siswa.progres < 6 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab7-nav" data-bs-toggle="collapse" href="#">
+           <span>Fungsi</span>
+           {% if user.siswa.progres < 6 %}
+           <i class="bi bi-lock-fill ms-auto"></i>
+         {% else %}
+           <i class="bi bi-chevron-down ms-auto"></i>
+         {% endif %}
+      </a>
+      <ul id="bab7-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href=" {% url 'beranda5'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'fungsi'%}">
+            <i class="bi bi-circle"></i><span>Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'cara_kerja_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Cara Kerja Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameterisasi_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Parameterisasi Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'variabel_lokal_global'%}">
+            <i class="bi bi-circle"></i><span>Variabel Lokal Global</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_formal_aktual'%}">
+            <i class="bi bi-circle"></i><span>Parameter Formal Aktual</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_wajib_opsional'%}">
+            <i class="bi bi-circle"></i><span>Parameter Wajib dan Opsional</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Icons Nav -->   
+
+    <li {% if user.siswa.progres < 7 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+    
+      <a class="nav-link collapsed"  href="{% url 'input'%}">
+           <span>Evaluasi</span>
+      </a>
+  
+      <ul  class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      </ul>
+    </li>
+
+</aside>
+<!-- akhir sidebar-->
+
+
+  <main id="main" class="main">
+
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-20">
+          <div class="row">        
+
+            <!-- Recent Sales -->
+            <div class="col-25">
+              <div class="card recent-sales overflow-auto">              
+
+                <div class="card-content">
+                  <h3 class="card-title" align="center"></span>Percabangan Elif</h3>
+                  <p>Percabangan elif dalam Python adalah salah satu bentuk percabangan yang digunakan ketika kita memiliki beberapa kondisi yang ingin diperiksa. Penggunaan elif memungkinkan kita untuk memeriksa kondisi tambahan jika kondisi sebelumnya bernilai false. Dengan kata lain, jika kondisi pada blok if bernilai false, maka kondisi pada blok elif akan dievaluasi. Jika kondisi pada blok elif juga bernilai false, maka blok else akan dieksekusi. Perhatikan flowchart dibawah ini untuk memahami bagaimana percabanagan elif bekerja :</p>
+                  <img src ="{% static 'img/flowchart_elif.png'%}" style="margin-left:250px;">
+
+                  <p>Flowchart diatas menjelaskan bagaimana program akan memeriksa dari kondisi pertama yaitu kondisi if, jika kondisi bernilai benar maka blok kode if yang akan diproses, jika kondisi bernilai salah maka blok kode elif yang akan diproses terus menerus sasmpai kondisi elif bernilai salah, jika kondisi pada elif bernilai salah maka blok kode else yang akan diproses berikut struktur penulisan percabangan elif :</p>
+                  <div class="card border mb-3" style="max-width: 25rem;margin-left:200px;">
+                    <div class="card-header">  <strong>Struktur Dasar Percabangan Elif</strong></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <code>
+                                if kondisi :<br>
+                                &nbsp Perintah_jika_kondisi_benar<br>
+                                elif (kondisi2):<br>
+                                &nbsp perintah_jika_kondisi2_benar<br>
+                                elif (kondisi3):<br>
+                                &nbsp perintah_jika_kondisi3_benar<br>
+                                ..................................<br>
+                                else :<br>
+                                &nbsp perintah_jika_semua_kondisi_Salah<br>
+                              </code>
+                          </p>                          
+                    </div>
+                </div>
+        
+
+                  <P>Contoh Program menggunakan percabangan elif :</p>
+
+                    <div class="card border mb-3" style="max-width: 25rem;margin-left:200px;">
+                        <div class="card-header">  <strong>Contoh 2.3 Contoh Program Percabagan Elif</strong></div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                <code>
+                                    nilai = 50 <br>
+                                    if nilai >=80 :<br>
+                                    &nbsp print("Nilai = A")<br>
+                                    elif nilai >=70 :<br>
+                                    &nbsp print("Nilai = B")<br>
+                                    elif nilai >=60 :<br>
+                                    &nbsp print("Nilai = C")<br>
+                                    else :<br>
+                                    &nbsp print("Nilai = D")<br>
+                                  </code>
+                              </p>                          
+                        </div>
+                    </div>
+
+                            
+                  <p> Silahkan Coba contoh diatas pada IDE dibawah ini dan lihat apa output yang dihasilkan! </p>
+                      <script async src="https://edube.org/sandbox/b6b0fd24-02a7-11ee-be54-0242157e55ca/embed?height=250"></script><br>
+                  
+                      <div class="quiz-container">
+                        <div class="card" style="padding:20px; margin:20px;">
+                          <div class="card-header"><h5>Latihan 5.3</h5></div>
+                          <strong><i class="bi bi-info-circle-fill"></i>&nbsp Petunjuk pengerjaan :</strong><br>
+                            <ul>
+                              <li>Baca dan pahami setiap pertanyaan yang diberikan</li>
+                              <li>Ketikan jawaban pada bagian yang kosong</li>
+                              <li>Klik tombol cek jawaban unutk memeriksa jawaban</li>
+                              <li>Jika jawaaban benar maka akan uncul pesan "Jawaban benar !"</li>
+                              <li>Jika jawaban salah maka akan munucl pesan "Jawaban Salah!"</li>
+                              <li>Klik tombol selanjutnya untuk mengerjakan soal selajutnya, atau klik tombol sebelumnya unutk kembali ke saol sebelumnya</li>
+                            </ul>
+                        <div id="question1" class="question-card card" style="display: block;">
+                          <div class="card-body">
+                            <p>1. Isikan bagian kosong pada kode program dibawah ini degan jawaban yang tepat agar bisa menerima input berupa integer dan mencetaknya </p>
+                            <code>
+                              &nbsp&nbsp umur = 18<br> 
+                              &nbsp&nbsp<input type="text" id="answer1a"> umur >=0 and <= 5  :<br>
+                              &nbsp&nbsp &nbsp&nbsp print("Balita") <br>
+                              &nbsp&nbsp<input type="text" id="answer1b"> umur > 5 and <=12 :<br>
+                              &nbsp&nbsp &nbsp&nbsp print("anak-anak")<br>
+                              &nbsp&nbsp<input type="text" id="answer1c">umur > 12 and <=20 : <br>
+                              &nbsp&nbsp &nbsp&nbsp print("Remaja")<br>
+                              &nbsp&nbsp else :<br>
+                              &nbsp&nbsp &nbsp&nbsp print("Dewasa")<br>
+                            </code>
+                            <div id="feedback1" class="feedback"></div><br>
+                            <button class="check-btn btn btn btn-primary btn btn-success btn-sm" onclick="checkAnswer(1)">Cek Jawaban</button>
+                            <button id="next-btn" class="next-btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                          </div>
+                        </div>
+                      
+                        <div id="question2" class="question-card card" style="display: none;">
+                          <div class="card-body">
+                            <p>2.isikan bagian kode dengan jawaban yang tepat agar bisa menerima inputan berupa bilangan desimal yang disimpan di varaibel <code>suhu</code> dan mencetak ke layar</p>
+                            <code>
+                              &nbsp&nbsp angka = int(input("masukan kangka = "))<br> 
+                              &nbsp&nbsp<input type="text" id="answer2a"> angka > 0 :<br>
+                              &nbsp&nbsp &nbsp&nbsp print("bilangan bulat positif")<br>
+                              &nbsp&nbsp<input type="text" id="answer2b"> angka < 2 :<br>
+                              &nbsp&nbsp &nbsp&nbsp print("bilangan bulat negatif")<br>
+                              &nbsp&nbsp <input type="text" id="answer2c"> :
+                              &nbsp&nbsp &nbsp&nbsp print("Bilangan nol")<br>
+                            </code>
+                            <div id="feedback2" class="feedback"></div><br>
+                            <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                            <button class="check-btn btn btn btn-success btn-sm" onclick="checkAnswer(2)">Cek Jawaban</button>
+                            <button id="next-btn" class="next-btn btn btn btn-primary btn-sm" onclick="nextQuestion()">Selanjutnya</button>
+                          </div>
+                        </div>
+                      
+                        <div id="question3" class="question-card card" style="display: none;">
+                          <div class="card-body">
+                            <p>3.isikan bagian kode dengan jawaban yang tepat </p>
+                            <code>
+                              &nbsp&nbsp sisi_a = float(input("Masukan panjang sisi a = "))<br>
+                              &nbsp&nbsp sisi_b = float(input("Masukan panjang sisi b = "))<br>
+                              &nbsp&nbsp sisi_c = float(input("Masukan panjang sisi c = "))<br><br>
+                              
+                              &nbsp&nbsp <input type="text" id="answer3a"> sisi_a == sisi_b == sisi_c :<br>
+                              &nbsp&nbsp&nbsp print(" Segitiga sama sisi ")<br>
+                              &nbsp&nbsp <input type="text" id="answer3b"> :<br>
+                              &nbsp&nbsp&nbsp if  sisi_a == sisi_b or sisi_b == sisi_c or sisi_c == sisi_a : <br>
+                              &nbsp&nbsp&nbsp&nbsp print("Segitiga sama kaki")<br>
+                              &nbsp&nbsp&nbsp <input type="text" id="answer3c">:<br>
+                              &nbsp&nbsp&nbsp&nbsp print("Segitiga sembarang")<br>
+
+                            </code>
+                            <div id="feedback3" class="feedback"></div><br>
+                            <button class="prev-btn btn btn btn-secondary btn-sm" onclick="prevQuestion()">Pertanyaan Sebelumnya</button>
+                            <button class="check-btn btn btn-success btn-sm" onclick="checkAnswer(3)">Cek Jawaban</button>
+                          </div>
+                        </div>
+                      </div>
+                      
+                  <div class = "btn-nav">
+                   <a href="{% url 'percabangan_if_else' %}"><button class="btn btn-secondary"> Sebelumnya </button></a>
+                   <a href="{% url 'kuis_bab5'%}"><button class="btn btn-primary"> Selanjutnya </button></a>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+           
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+  </main><!-- End #main -->
+  <script>
+    let currentQuestion = 1;
+    const totalQuestions = 7;
+  
+    function showQuestion(questionNumber) {
+      for (let i = 1; i <= totalQuestions; i++) {
+        const questionElement = document.getElementById(`question${i}`);
+        questionElement.style.display = i === questionNumber ? "block" : "none";
+      }
+  
+      // Menonaktifkan tombol "Selanjutnya" pada akhir pertanyaan
+      document.getElementById('next-btn').disabled = questionNumber === totalQuestions;
+    }
+  
+    function checkAnswer(questionNumber) {
+      const answerA = document.getElementById(`answer${questionNumber}a`).value;
+      const answerB = document.getElementById(`answer${questionNumber}b`).value;
+      const answerC = document.getElementById(`answer${questionNumber}c`).value;
+      const feedbackElement = document.getElementById(`feedback${questionNumber}`);
+  
+      // Contoh jawaban benar untuk setiap pertanyaan
+      const correctAnswersA = ["if", "if", "if"];
+      const correctAnswersB = ["elif", "elif", "else"];
+      const correctAnswersC = ["elif", "else", "else"];
+  
+      if (answerA === correctAnswersA[questionNumber - 1] && answerB === correctAnswersB[questionNumber - 1] && answerC === correctAnswersC[questionNumber - 1]) {
+        feedbackElement.textContent = "Jawaban Benar!";
+        feedbackElement.style.color = "green";
+      } else {
+        feedbackElement.textContent = "Jawaban Salah. Coba lagi!";
+        feedbackElement.style.color = "red";
+      }
+    }
+  
+    function nextQuestion() {
+      if (currentQuestion < totalQuestions) {
+        currentQuestion++;
+        showQuestion(currentQuestion);
+      }
+    }
+  
+    function prevQuestion() {
+      if (currentQuestion > 1) {
+        currentQuestion--;
+        showQuestion(currentQuestion);
+      }
+    }
+  </script>
+{% endblock konten %}
+

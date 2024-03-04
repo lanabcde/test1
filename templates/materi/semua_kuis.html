@@ -1,0 +1,355 @@
+
+{% extends "baseMateri.html"%}
+
+{% load static %}
+
+{% block judul %}
+  <title>Beranda Bab 2</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <style>
+    .disabled {
+      pointer-events: none; /* Mencegah interaksi dengan elemen */
+      color: red; /* Warna teks yang dinonaktifkan */
+     
+    }
+  </style>
+{% endblock judul %}
+
+{% block konten %}
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#bab1-nav" data-bs-toggle="collapse" href="#">
+        <span>Program dan Pemrograman</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab1-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'beranda_1'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'program'%}">
+            <i class="bi bi-circle"></i><span>Pemorgraman</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bahasa_pemrograman'%}">
+            <i class="bi bi-circle"></i><span>Bahasa Pemrograman</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'interpreter_compiler'%}">
+              <i class="bi bi-circle"></i><span>Bahasa Pemrograman Interpretasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'bahasa_python' %}">
+              <i class="bi bi-circle"></i><span>Bahasa Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab1' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 1</span>
+            </a>
+          </li>
+        </ul>
+
+        <li  {% if user.siswa.progres < 1 %} class ="disabled" {%else%}class="nav-item"{% endif %}>
+          <a class="nav-link" data-bs-target="#bab2-nav" data-bs-toggle="collapse" href="#">
+           <span>Sintak Dasar Python</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="bab2-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{% url 'beranda2' %}" class="active">
+                <i class="bi bi-circle"></i><span>Beranda</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'sintak_dasar'%}">
+                <i class="bi bi-circle"></i><span>Sintak Dasar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'komentar'%}">
+                <i class="bi bi-circle"></i><span>Komentar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'kuis_bab2'%}">
+                <i class="bi bi-circle"></i><span>Kuis Bab 2</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+
+      
+      <li  {% if user.siswa.progres < 2 %} class="disabled" {% else %}class="nav-item text-white" {% endif%} >
+        <a class="nav-link collapsed" data-bs-target="#bab3-nav" data-bs-toggle="collapse" href="#">
+         <span>Tipe Data, variabel, Operator </span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="bab3-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'tipe_data'%}">
+              <i class="bi bi-circle"></i><span>Tipe Data</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'variabel'%}">
+              <i class="bi bi-circle"></i><span>Varaibel</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator'%}">
+              <i class="bi bi-circle"></i><span>Operator</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator_penugasan'%}">
+              <i class="bi bi-circle"></i><span>Operator Penugasan</span>
+            </a>
+      </li>
+      <li>
+        <a href="{% url 'operator_perbandingan'%}">
+          <i class="bi bi-circle"></i><span>Operator Perbandingan</span>
+        </a>
+    </li>
+    <li>
+            <a href="{% url 'operator_logika'%}">
+              <i class="bi bi-circle"></i><span>Operator Logika</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab3'%}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li  {% if user.siswa.progres < 3 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab4-nav" data-bs-toggle="collapse" href="#">
+        <span>Input Output Dasar</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab4-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'input' %}">
+            <i class="bi bi-circle"></i><span>Input Dasar</span>
+            </a>
+              </li>
+          <a href="{% url 'output' %}">
+            <i class="bi bi-circle"></i><span>Output Dasar</span>
+          </a>
+        </li>
+         <a href="kuis_bab4">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li  {% if user.siswa.progres < 4 %} class="disabled" {% else %} class="nav-item" {% endif%}>
+      <a class="nav-link collapsed" data-bs-target="#bab5-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Percabangan</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab5-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'percabangan' %}">
+              <i class="bi bi-circle"></i><span>Pengenalan Struktur Percabangan</span>
+            </a>
+          </li>
+        <li>
+          <a href="{% url 'percabangan_if'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_if_else'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If...Else</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_bersarang'%}">
+            <i class="bi bi-circle"></i><span>Percabangan Bersarang</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_elif' %}">
+            <i class="bi bi-circle"></i><span>Percabangan Elif</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'kuis_bab3' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li  {% if user.siswa.progres < 5 %} class="disabled" {% else %} class="nav-item" {% endif%}>
+      <a class="nav-link collapsed" data-bs-target="#bab6-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Perulangan</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab6-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'perulangan' %}">
+            <i class="bi bi-circle"></i><span>Pengenalan Struktur Perulangan</span>
+            </a>
+              </li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan While</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'perulangan_for' %}">
+            <i class="bi bi-circle"></i><span>Perulangan For</span>
+          </a>
+        </li>
+        <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+   
+
+    <li  {% if user.siswa.progres < 6 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab7-nav" data-bs-toggle="collapse" href="#">
+           <span>Fungsi</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab7-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href=" {% url 'beranda5'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'fungsi'%}">
+            <i class="bi bi-circle"></i><span>Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'cara_kerja_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Cara Kerja Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameterisasi_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Parameterisasi Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'variabel_lokal_global'%}">
+            <i class="bi bi-circle"></i><span>Variabel Lokal Global</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_formal_aktual'%}">
+            <i class="bi bi-circle"></i><span>Parameter Formal Aktual</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_wajib_opsional'%}">
+            <i class="bi bi-circle"></i><span>Parameter Wajib dan Opsional</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Icons Nav -->   
+
+    <li  {% if user.siswa.progres < 7 %} class="disabled" {% else %}  class="nav-item" {% endif%}>
+    
+      <a class="nav-link collapsed"  href="{% url 'evaluasi'%}">
+           <span>Evaluasi</span>
+      </a>
+  
+      <ul  class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      </ul>
+    </li>
+
+</aside><!-- End Sidebar-->
+
+  <main id="main" class="main">
+
+    <h1 class="display-4 text-center my-5">Semua Kuis</h1>
+
+
+	<div class="container">
+		<div class="d-flex flex-wrap">
+			<a href="{% url 'semua_kuis' %}" class="btn btn-sm btn-light m-1">Kuis</a>
+			
+		</div>
+	</div>
+
+	
+
+	<div class="container">
+
+		<div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 g-3">
+			{% if quizzes|length > 0 %}
+			{% for quizzes in quizzes %}
+			<div class="col">
+				<div class="card shadow-sm">
+					<div class="card-body">
+						<h4>{{quizzes.title}}</h4>
+						<p class="card-text">Jumlah Soal - {{quizzes.question_set.all|length}}</p>
+						<p class="card-text">{{quizzes.description|truncatewords:7}}</p>
+						<div class="d-flex justify-content-between align-items-center">
+							<div class="btn-group">
+								<a href="{% url 'kuis' quizzes.id %}" type="button" class="btn btn-sm btn-outline-success">Mulai Kuis</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			{% else %}
+			<div class="col-lg-12 col-md-12 col-12">
+				<p class="text-center text-danger fs-5">Tidak ada kuis yang tersedia.</p>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock konten %}
+
+
+
+
+
+
+
+
+
+

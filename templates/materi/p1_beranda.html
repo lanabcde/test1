@@ -1,0 +1,401 @@
+
+{% extends "baseMateri.html"%}
+
+{% load static %}
+
+{% block judul %}
+  <title>Program</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <style>
+    .disabled {
+      pointer-events: none; /* Mencegah interaksi dengan elemen */
+      color: red; /* Warna teks yang dinonaktifkan */
+     
+    }
+  </style>
+{% endblock judul %}
+
+{% block konten %}
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-target="#bab1-nav" data-bs-toggle="collapse" href="#">
+        <span>Program dan Pemrograman</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="bab1-nav" class="nav-content collapse show " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="{% url 'beranda_1'%}" class="active">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'program'%}"> 
+            <i class="bi bi-circle"></i><span>Pemorgraman</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'bahasa_pemrograman'%}">
+            <i class="bi bi-circle"></i><span>Bahasa Pemrograman</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'interpreter_compiler'%}">
+              <i class="bi bi-circle"></i><span>Bahasa Pemrograman Interpretasi</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'bahasa_python' %}">
+              <i class="bi bi-circle"></i><span>Bahasa Python</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'kuis_bab1' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 1</span>
+            </a>
+          </li>
+        </ul>
+
+        <li {% if user.siswa.progres < 1 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+          <a class="nav-link collapsed" data-bs-target="#bab2-nav" data-bs-toggle="collapse" href="#">
+           <span>Sintak Dasar Python</span>
+           {% if user.siswa.progres < 1 %}
+            <i class="bi bi-lock-fill ms-auto"></i>
+           {% else %}
+            <i class="bi bi-chevron-down ms-auto"></i>
+           {% endif %}
+          </a>
+          <ul id="bab2-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="{% url 'beranda2' %}">
+                <i class="bi bi-circle"></i><span>Beranda</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'sintak_dasar'%}">
+                <i class="bi bi-circle"></i><span>Sintak Dasar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'komentar'%}">
+                <i class="bi bi-circle"></i><span>Komentar</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'kuis_bab2'%}">
+                <i class="bi bi-circle"></i><span>Kuis Bab 2</span>
+              </a>
+            </li>
+        </ul>
+      </li>
+
+      
+      <li {% if user.siswa.progres < 2 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+        <a class="nav-link collapsed" data-bs-target="#bab3-nav" data-bs-toggle="collapse" href="#">
+         <span>Tipe Data, variabel, Operator</span>
+         {% if user.siswa.progres < 2 %}
+         <i class="bi bi-lock-fill mas-auto"></i>
+         {% else %}
+            <i class="bi bi-chevron-down ms-auto"></i>
+         {% endif %}
+        </a>
+        <ul id="bab3-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'tipe_data'%}">
+              <i class="bi bi-circle"></i><span>Tipe Data</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'variabel'%}">
+              <i class="bi bi-circle"></i><span>Varaibel</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator'%}">
+              <i class="bi bi-circle"></i><span>Operator</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'operator_penugasan'%}">
+              <i class="bi bi-circle"></i><span>Operator Penugasan</span>
+            </a>
+      </li>
+      <li>
+        <a href="{% url 'operator_perbandingan'%}">
+          <i class="bi bi-circle"></i><span>Operator Perbandingan</span>
+        </a>
+    </li>
+    <li>
+        <a href="{% url 'operator_logika'%}">
+         <i class="bi bi-circle"></i><span>Operator Logika</span>
+        </a>
+    </li>
+          <li>
+            <a href="{% url 'kuis_bab3'%}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li {% if user.siswa.progres < 3 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab4-nav" data-bs-toggle="collapse" href="#">
+        <span>Input Output Dasar</span>
+        {% if user.siswa.progres < 3 %}
+         <i class="bi bi-lock-fill ms-auto"></i>
+        {% else %}
+            <i class="bi bi-chevron-down ms-auto"></i>
+        {% endif %}
+      </a>
+      <ul id="bab4-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'input' %}">
+            <i class="bi bi-circle"></i><span>Input Dasar</span>
+            </a>
+              </li>
+          <a href="{% url 'output' %}">
+            <i class="bi bi-circle"></i><span>Output Dasar</span>
+          </a>
+        </li>
+         <a href="kuis_bab4">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li {% if user.siswa.progres < 4 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab5-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Percabangan</span>
+        {% if user.siswa.progres < 4 %}
+        <i class="bi bi-lock-fill ms-auto"></i>
+       {% else %}
+           <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab5-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda3' %}">
+              <i class="bi bi-circle"></i><span>Beranda</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'percabangan' %}">
+              <i class="bi bi-circle"></i><span>Pengenalan Struktur Percabangan</span>
+            </a>
+          </li>
+        <li>
+          <a href="{% url 'percabangan_if'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_if_else'%}">
+            <i class="bi bi-circle"></i><span>Percabangan If...Else</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_bersarang'%}">
+            <i class="bi bi-circle"></i><span>Percabangan Bersarang</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'percabangan_elif' %}">
+            <i class="bi bi-circle"></i><span>Percabangan Elif</span>
+          </a>
+        </li>
+        <li>
+            <a href="{% url 'kuis_bab3' %}">
+              <i class="bi bi-circle"></i><span>Kuis BAB 3</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li {% if user.siswa.progres < 5 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab6-nav" data-bs-toggle="collapse" href="#">
+        <span>Struktur Perulangan</span>
+        {% if user.siswa.progres < 5 %}
+        <i class="bi bi-lock-fill mss-auto"></i>
+       {% else %}
+        <i class="bi bi-chevron-down ms-auto"></i>
+       {% endif %}
+      </a>
+      <ul id="bab6-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="{% url 'beranda4' %}">
+              <i class="bi bi-circle"></i><span>Beranda </span>
+            </a>
+        </li>
+         <li>
+            <a href="{% url 'perulangan' %}">
+            <i class="bi bi-circle"></i><span>Pengenalan Struktur Perulangan</span>
+            </a>
+              </li>
+          <a href="{% url 'perulangan_while' %}">
+            <i class="bi bi-circle"></i><span>Perulangan While</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'perulangan_for' %}">
+            <i class="bi bi-circle"></i><span>Perulangan For</span>
+          </a>
+        </li>
+        <li>
+            <a href="">
+              <i class="bi bi-circle"></i><span>Kuis BAB 4</span>
+            </a>
+          </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+   
+
+    <li {% if user.siswa.progres < 6 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed" data-bs-target="#bab7-nav" data-bs-toggle="collapse" href="#">
+           <span>Fungsi</span>
+           {% if user.siswa.progres < 6 %}
+           <i class="bi bi-lock-fill ms-auto"></i>
+           {% else %}
+              <i class="bi bi-chevron-down ms-auto"></i>
+          {% endif %}
+      </a>
+      <ul id="bab7-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href=" {% url 'beranda5'%}">
+            <i class="bi bi-circle"></i><span>Beranda</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'fungsi'%}">
+            <i class="bi bi-circle"></i><span>Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'cara_kerja_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Cara Kerja Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameterisasi_fungsi'%}">
+            <i class="bi bi-circle"></i><span>Parameterisasi Fungsi</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'variabel_lokal_global'%}">
+            <i class="bi bi-circle"></i><span>Variabel Lokal Global</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_formal_aktual'%}">
+            <i class="bi bi-circle"></i><span>Parameter Formal Aktual</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'parameter_wajib_opsional'%}">
+            <i class="bi bi-circle"></i><span>Parameter Wajib dan Opsional</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Icons Nav -->   
+
+    <li {% if user.siswa.progres < 7 %} class="disabled" {% else %} class="nav-item" {% endif %}>
+      <a class="nav-link collapsed"  href="{% url 'input'%}">
+           {% if user.siswa.progres < 7 %}
+           <span>Evaluasi</span> <i class="bi bi-lock-fill ms-auto"></i>
+           {% else %}
+           <span>Evaluasi</span>
+           {% endif %}
+      </a>
+  
+      <ul  class="nav-content collapse " data-bs-parent="#sidebar-nav">
+      </ul>
+    </li>
+
+</aside><!-- End Sidebar-->
+
+
+  <main id="main" class="main">
+   
+    <section class="section dashboard">
+      <div class="row">
+
+        <!-- Left side columns -->
+        <div class="col-lg-20">
+          <div class="row">        
+
+            <!-- Recent Sales -->
+            <div class="col-25">
+              <div class="card recent-sales overflow-auto">              
+
+                <div class="card-content">
+                  <h3 class="card-title" align="center"></span>Beranda BAB I   </h3>
+                  <h5><strong>Pendahuluan</strong></h5>
+                  <p>Pada materi ini akan memperkenalkan dasar-dasar program komputer dan pemrograman,
+                     serta bahasa pemrograman Python. Program komputer adalah serangkaian instruksi 
+                     yang dirancang untuk menyelesaikan tugas tertentu, sementara pemrograman melibatkan
+                      pengembangan algoritma untuk menulis instruksi tersebut. Python, dengan sintaks yang sederhana
+                       dan fleksibel, adalah salah satu bahasa pemrograman paling populer yang digunakan 
+                       untuk berbagai keperluan seperti pengembangan perangkat lunak, analisis data,
+                        dan kecerdasan buatan. Dengan memahami konsep dasar ini, kita akan siap memulai
+                         perjalanan dalam dunia pemrograman komputer.
+                  </p>
+
+                  <div class="card">
+                    <div class="card-header"><h5>Tujuan Pembelajaran :</h5></div>
+                        <p class="card-text">
+                          <ul>
+                            <li>Peserta didik dapat memahami serta membedakan antara program,
+                              pemrograman dan bahasa pemrograman dengan memahami materi dan mengerjakan latihan serta kuis
+                              pada media pembelajaran
+                            </li>
+                            <li>
+                              peserta didik mengetahui sejarah bahasa pemrograman python
+                            </li>
+                            <li>
+                              peserta didik dapat memahami interpreter serta peran interpreter pada bahasa pemrograman python
+                            </li>
+                          </ul>
+                          </p>                          
+                    </div>
+                    <div class='btn-nav'>
+                      <a href="{% url 'program' %}"> <button type="button" class="btn btn-primary">Selanjutnya</button></a>
+                    </div>
+                  
+                    
+                </div>
+
+               
+
+                </div>
+
+              </div>
+            </div>
+
+           
+
+          </div>
+        </div><!-- End Left side columns -->
+
+        <!-- Right side columns -->
+        
+
+      </div>
+    </section>
+  </main><!-- End #main -->
+{% endblock konten %}
+
